@@ -1,0 +1,40 @@
+/* .card table {
+    position: relative;
+}
+
+.card table thead{
+    position: absolute;
+    top:0;
+    width: 100%;
+}
+.card table thead tr{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.card table thead tr th{
+    width: 100%;
+} */
+
+.card{
+    height: 100%;
+}
+
+.card table thead,
+.card table tbody tr{
+    display: table;
+    width:100%;
+    table-layout: fixed;
+}
+
+.card table > div{
+    display: block;
+    overflow: auto;
+    width: 100%;
+    position: absolute;
+    height: calc(100% - 5rem);
+}
+
+.card table{
+    overflow-y: auto;
+}

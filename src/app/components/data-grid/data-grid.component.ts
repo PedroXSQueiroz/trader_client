@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 
 export class Column
 {
@@ -60,7 +60,8 @@ export interface DataSource<T>{
 @Component({
   selector: 'data-grid',
   templateUrl: './data-grid.component.html',
-  styleUrls: ['./data-grid.component.css']
+  styleUrls: ['./data-grid.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DataGridComponent implements OnInit 
 {
