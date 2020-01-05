@@ -1,21 +1,3 @@
-/* .card table {
-    position: relative;
-}
-
-.card table thead{
-    position: absolute;
-    top:0;
-    width: 100%;
-}
-.card table thead tr{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-.card table thead tr th{
-    width: 100%;
-} */
-
 .card{
     height: 100%;
 }
