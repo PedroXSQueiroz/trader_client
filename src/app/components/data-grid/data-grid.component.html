@@ -1,0 +1,27 @@
+<table>
+
+    <thead>
+        <tr>
+
+            <th *ngFor="let column of columns"> {{column.name}} </th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr *ngFor="let row of rows;let rowIndex = index">
+
+            <td *ngFor="let column of columns" [id]="index + '-' + column.name">
+
+                <span *ngIf="!column.templateName">
+                    {{row[column.property]}}
+                </span>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
