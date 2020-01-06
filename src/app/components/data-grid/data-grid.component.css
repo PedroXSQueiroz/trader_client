@@ -9,6 +9,10 @@
     table-layout: fixed;
 }
 
+tbody tr:first-child {
+    border-top: none;
+}
+
 .card table > div{
     display: block;
     overflow: auto;
