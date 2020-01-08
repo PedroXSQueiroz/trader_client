@@ -11,17 +11,15 @@ export default class BindableDataSource<T> implements DataSource<T>
     {
         this._propertyDescriptor = Object.getOwnPropertyDescriptor( Object.getPrototypeOf(this._container), this._propertyName );
         
-        let setPropertyFunction = this._propertyDescriptor.set;
-        
         this._propertyDescriptor.set = (data) => {
             
-            setPropertyFunction(data);
+            this._container[this._propertyName] = data;
 
             this._grid.refresh();
         }
 
     }
-    
+
     fetch(): any[] {
         return this._container[this._propertyName];
     }

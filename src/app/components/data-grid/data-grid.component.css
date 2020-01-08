@@ -18,7 +18,7 @@ tbody tr:first-child {
     overflow: auto;
     width: 100%;
     position: absolute;
-    height: calc(100% - 5rem);
+    height: calc(100% - 9rem);
 }
 
 .card table{
@@ -30,4 +30,21 @@ tbody tr:first-child {
     padding: 0.5rem;
     font-size: 0.75rem;
     padding-left: 1.5rem;
+}
+
+pagination-control{
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+ngb-pagination{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    justify-content: center;
+    display: flex;
 }

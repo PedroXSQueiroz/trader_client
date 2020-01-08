@@ -14,9 +14,9 @@
         <div>
             <tbody>
                 
-                    <tr *ngFor="let row of rows;let rowIndex = index">
+                    <tr *ngFor="let row of rows">
             
-                        <td *ngFor="let column of columns" [id]="index + '-' + column.name">
+                        <td *ngFor="let column of columns">
             
                             <span *ngIf="!column.templateName">
                                 {{row[column.property]}}
@@ -30,5 +30,14 @@
         </div>
     
     </table>
+
+    <ngb-pagination
+        [(page)]="currentPage"
+        [pageSize]="currentPageSize"
+        [boundaryLinks]="true"
+        [maxSize]="5"
+        [rotate]="true"
+        [collectionSize]="total">
+    </ngb-pagination>
 
 </div>

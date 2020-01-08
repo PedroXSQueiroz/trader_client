@@ -14,8 +14,33 @@ export class QuotationsComponent implements OnInit, AfterViewInit {
   
   private _quotationsPage: QuotationPage;
 
+  private _isUpdating: boolean;
+
   get quotations(): QuotationModel[] 
   {
+    const page = this.grid.currentPage - 1;
+    const size = this.grid.currentPageSize;
+
+    if(this._quotationsPage && !this._isUpdating)
+    {
+      this._isUpdating = true;
+      this._quotationsPage = null;
+      
+      this._quotationsService.list(page, size).then( page => { 
+        
+        if(!this._quotationsPage && this._isUpdating)
+        {
+          this._quotationsPage = page
+          this.grid.refresh();
+        }
+  
+      });
+    }else{
+      
+      this._isUpdating = false;
+    
+    }
+    
     return this._quotationsPage ? this._quotationsPage.content : [];
   }
 
@@ -23,14 +48,15 @@ export class QuotationsComponent implements OnInit, AfterViewInit {
   
   constructor(private _quotationsService: QuotationsService) { }
 
-  private async load()
+  private async load(offset:number = 0, limit:number = this.grid.currentPageSize)
   {
-    this._quotationsPage = await this._quotationsService.list();
+    this._quotationsPage = await this._quotationsService.list(offset, limit);
 
     let columns:Column[] = this._quotationsPage.contentProperties.map( prop => new Column(prop.name, prop.name, prop.description) );
 
     this.grid.setConfig( new Config(
-      columns
+      columns,
+      this._quotationsPage.totalElements
     ));
 
     this.grid.refresh();

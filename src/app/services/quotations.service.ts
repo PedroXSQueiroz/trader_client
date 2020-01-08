@@ -15,10 +15,10 @@ export class QuotationsService {
 
   }
 
-  async list(): Promise< QuotationPage >
+  async list(page:number, size:number): Promise< QuotationPage >
   {
     return await this._httpClient
-                          .get<QuotationPage>(`${environment.api}/quotations`)
+                          .get<QuotationPage>(`${environment.api}/quotations?page=${page}&size=${size}`)
                           .toPromise();
   }
 

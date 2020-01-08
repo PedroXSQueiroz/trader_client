@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewEncapsulation, AfterViewChecked } from '@angular/core';
 
 export class Column
 {
@@ -42,9 +42,15 @@ export class Column
 export class Config
 {
   constructor(
-    private _columns:Column[]
+    private _columns:Column[],
+    private _total:number
   )
   {
+  }
+
+  get total():number
+  {
+    return this._total;
   }
 
   get columns():Column[]
@@ -63,13 +69,15 @@ export interface DataSource<T>{
   styleUrls: ['./data-grid.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class DataGridComponent implements OnInit 
+export class DataGridComponent implements OnInit
 {
   private _dataSource:DataSource<any>;
 
+  private _rows:any[];
+  
   get rows():any[]
   {
-    return this._dataSource.fetch();
+    return this._rows;
   }
   
   private _config:Config;
@@ -79,8 +87,39 @@ export class DataGridComponent implements OnInit
     return this._config.columns;
   }
 
+  get total():number
+  {
+    return this._config.total;
+  }
+
+  private _currentPage:number;
+
+  get currentPage():number
+  {
+    return this._currentPage;
+  }
+
+  set currentPage(page:number)
+  {
+    this._currentPage = page;
+    this.refresh();
+  }
+
+  private _currentPageSize:number = 50;
+
+  get currentPageSize():number
+  {
+    return this._currentPageSize;
+  }
+
+  set currentPageSize(size:number)
+  {
+    this._currentPageSize = size;
+  }
+
   constructor(private _changeDetectorRef:ChangeDetectorRef) 
   { 
+    this._currentPage = 1;
   }
   
   ngOnInit() 
@@ -100,8 +139,8 @@ export class DataGridComponent implements OnInit
 
   refresh()
   {
+    this._rows = this._dataSource.fetch();
     this._changeDetectorRef.detectChanges();
-    this._changeDetectorRef.markForCheck();
   }
 
 }
